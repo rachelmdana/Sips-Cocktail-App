@@ -23,7 +23,7 @@ CREATE TABLE "Cocktail_Ingredient" (
 );
 
 CREATE TABLE "User" (
-    "id" SERIAL PRIMARY KEY,
+    "id" INT PRIMARY KEY,
     "username" VARCHAR(255) NOT NULL UNIQUE,
     "password" VARCHAR(255) NOT NULL,
     "favorited_cocktails" INT[],  -- Array of cocktail IDs
