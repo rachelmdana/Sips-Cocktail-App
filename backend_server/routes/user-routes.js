@@ -1,38 +1,19 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const debug = require('debug')('my-app:login-route');
-
-// Create a new router
 const router = express.Router();
+const pool = require('../db'); // Import your database connection
 
-// Sample user credentials (replace this with your actual user authentication logic)
-const validUsername = 'user';
-const validPassword = 'password';
+// Endpoint to fetch the user's bar data
+router.get('/user/bar', async (req, res) => {
+  try {
+    // Assuming you have a UserBar model and method to fetch the user's bar data
+    const userBarData = await UserBar.getUserBarData(); // Implement this method in your UserBar model
 
-// Login Route
-router.post('/login', (req, res) => {
-  const { username, password } = req.body;
-
-  console.log('Received username:', username);
-  console.log('Received password:', password);
-  console.log('Valid username:', validUsername);
-  console.log('Valid password:', validPassword);
-
-  // Check if username and password are valid
-  if (username === validUsername && password === validPassword) {
-    // Generate JWT token
-    const token = jwt.sign({ username }, 'your_secret_key', { expiresIn: '1h' });
-    res.json({ token });
-  } else {
-    res.status(401).json({ error: 'Invalid username or password' });
+    // Send the user's bar data as a response
+    res.json(userBarData);
+  } catch (error) {
+    console.error('Error fetching user bar data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-// Logout Route (not typically needed if using JWT)
-router.post('/logout', (req, res) => {
-  // Perform logout logic here (e.g., invalidate token)
-  res.json({ message: 'Logout successful' });
-});
-
-// Export the router
 module.exports = router;

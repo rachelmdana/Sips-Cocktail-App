@@ -1,53 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function LoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch('/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-      if (response.ok) {
-        // Handle successful login
-      } else {
-        // Handle login error
-        console.error('Login failed');
-      }
-    } catch (error) {
-      console.error('Error occurred during login:', error);
-    }
+function LoginPage({ handleLogin }) {
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const user = {
+      username: formData.get('username'),
+      password: formData.get('password'),
+    };
+    handleLogin(user);
   };
 
   return (
-    <div>
-      <h1>Login Page</h1>
-      <form onSubmit={handleLogin}>
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          id="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <form onSubmit={handleFormSubmit}>
+      <label htmlFor="username">Username:</label>
+      <input type="text" name="username" id="username" required />
+      <label htmlFor="password">Password:</label>
+      <input type="password" name="password" id="password" required />
+      <button type="submit">Login</button>
+    </form>
   );
 }
 

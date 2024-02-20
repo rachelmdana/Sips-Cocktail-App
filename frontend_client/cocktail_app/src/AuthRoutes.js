@@ -1,17 +1,11 @@
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
 
-function AuthenticatedRoute({ component: Component, ...rest }) {
-  const isAuthenticated = !!localStorage.getItem('token');
+const AuthenticatedRoute = () => {
+  const isAuthenticated = localStorage.getItem('token');
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Navigate to="/login" />
-      }
-    />
-  );
-}
+  return isAuthenticated ? <Outlet /> : <LoginPage />;
+};
 
 export default AuthenticatedRoute;
