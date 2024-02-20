@@ -1,13 +1,21 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+const authRoutes = require('./routes/user-routes');
 const cocktailRoutes = require('./routes/cocktail-routes');
 const ingredientRoutes = require('./routes/ingredient-routes');
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
-// Use cocktail and ingredient routes
+app.use('/auth', (req, res, next) => {
+  console.log('Request body:', req.body);
+  next();
+});
+
+// Routes middleware
+app.use('/auth', authRoutes);
 app.use('/cocktails', cocktailRoutes);
 app.use('/ingredients', ingredientRoutes);
 
