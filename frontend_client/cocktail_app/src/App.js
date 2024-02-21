@@ -3,6 +3,7 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import Dashboard from './components/Dashboard';
+import CocktailDetails from './components/CocktailDetails';
 import axios from 'axios';
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
   }, [loginSuccess, navigate]);
 
   return (
-     <Routes>
+    <Routes>
       <Route path="/" exact element={<LandingPage />} />
       <Route path="/login" element={<LoginPage handleLogin={handleLogin} />} />
       <Route
@@ -43,7 +44,7 @@ function App() {
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
-    );
+  );
 }
 
 export default App;
