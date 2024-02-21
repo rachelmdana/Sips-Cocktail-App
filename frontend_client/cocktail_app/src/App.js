@@ -42,6 +42,8 @@ function App() {
           )
         }
       />
+
+      <Route path="/drinks/:id" element={<CocktailDetails />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
