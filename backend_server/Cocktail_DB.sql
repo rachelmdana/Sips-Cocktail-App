@@ -34,6 +34,8 @@ CREATE TABLE "User" (
 
 CREATE TABLE "UserBar" (
     "user_id" INT REFERENCES "User" ("id"),
-    "liquor" VARCHAR(255) NOT NULL,
-    PRIMARY KEY ("user_id", "liquor")
+    "liquor_id" INT REFERENCES "Ingredient" ("id"),
+    "brand_name" VARCHAR(255) NOT NULL,
+    "category" VARCHAR(255),
+    PRIMARY KEY ("user_id", "liquor_id")
 );
