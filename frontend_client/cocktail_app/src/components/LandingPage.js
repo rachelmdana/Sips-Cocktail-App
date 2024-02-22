@@ -29,12 +29,12 @@ const CombinedComponent = () => {
   return (
     <div className="landing-page">
       <div className="header-title">
-        <h1>Welcome to Cocktail App</h1>
+        <h1>Welcome to Sips</h1>
       </div>
       <Navbar />
     <div className="cocktail-list">
-          <CocktailList title="Random Cocktails" component={CocktailCard} cocktail={cocktails} marginBottom="1rem" />
-          <CocktailList title="Popular Cocktails" component={CocktailCard} cocktail={popularCocktails} />
+          <CocktailList title="Sippin' Spirits" component={CocktailCard} cocktail={cocktails} marginBottom="1rem" />
+          <CocktailList title="Popular Sips" component={CocktailCard} cocktail={popularCocktails} />
         </div>
         </div>
   );
