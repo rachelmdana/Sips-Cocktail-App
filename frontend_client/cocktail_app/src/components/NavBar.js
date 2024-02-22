@@ -1,48 +1,61 @@
 import React, { useState } from 'react';
-import SearchForm from './SearchForm';
-import FilterForm from './FilterForm';
+import '../styles/Drinks.css';
 
-const Navbar = () => {
+const Navbar = ({cocktails}) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
   const [searchType, setSearchType] = useState('cocktailByName');
 
-  const searchEndpoints = {
-    cocktailByName: '/searchByCocktailName',
-    ingredientByName: '/searchByIngredientName',
-    searchByIngredient: '/filterByIngredients',
-    popular: '/popular',
-  };
+const handleSearch = async () => {
+  try {
+    setSearchType(searchType);
+    let endpoint = '';
+    switch (searchType) {
+      case 'cocktailByName':
+        endpoint = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?s=${searchTerm}`;
+        break;
+      case 'ingredientByName':
+        endpoint = `https://www.thecocktaildb.com/api/json/v2/9973533/search.php?i=${searchTerm}`;
+        break;
+      case 'searchByIngredient':
+        endpoint = `https://www.thecocktaildb.com/api/json/v2/9973533/filter.php?i=${searchTerm}`;
+        break;
+      case 'popular':
+        endpoint = '/popular';
+        break;
+      default:
+        endpoint = '';
+    }
 
-  const handleSearch = async () => {
-    try {
-      const response = await fetch(`${searchEndpoints[searchType]}?searchTerm=${searchTerm}`);
+    if (endpoint) {
+      const response = await fetch(endpoint);
       if (response.ok) {
         const data = await response.json();
-        console.log(data); // Handle the response data as needed
+        const cocktails = data.drinks || [];
+        const filteredCocktails = cocktails.filter((cocktail) => cocktail.strDrink.toLowerCase().includes(searchTerm.toLowerCase()));
+        setSearchResults(filteredCocktails);
       } else {
         // Handle search error
         console.error('Search failed');
       }
-    } catch (error) {
-      console.error('Error occurred during search:', error);
     }
-  };
-
-
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
   return (
     <div className="header">
       <div className="header-right">
-        <SearchForm />
-        <FilterForm />
-        <input type="text" value={searchTerm} onChange={(e) =>
-                  setSearchTerm(e.target.value)} placeholder="Search cocktails" />
-                <select value={searchType} onChange={(e) =>
-                  setSearchType(e.target.value)}>
-                  <option value="cocktailByName">Search Cocktail by Name</option>
-                  <option value="ingredientByName">Search Ingredient by Name</option>
-                  <option value="searchByIngredient">Search by Ingredient</option>
-                </select>
-                <button onClick={handleSearch}>Search</button>
+        <h2>Search Cocktails</h2>
+        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search cocktails" />
+        <button onClick={() => handleSearch(searchType)}>Search</button>
+        <div className="search-results">
+          {searchResults.map((cocktail, index) => (
+            <div key={index}>
+              <a href={`/drinks/${cocktail.idDrink}`} className='link'>{cocktail.strDrink}</a>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

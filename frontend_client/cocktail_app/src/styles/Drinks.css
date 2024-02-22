@@ -1,35 +1,16 @@
-.ingredients-list {
+.search-results {
+    list-style: none;
     padding: 0;
     margin: 0;
-    list-style-type: none;
-    /* Remove bullet points */
-}
-
-.ingredients-list li {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    flex-direction: column;
+    margin-top: 50px;
 }
 
-.ingredients-list li::before {
-    content: counter(ingredient-counter, decimal);
-    counter-increment: ingredient-counter;
-    margin-right: 0.5rem;
-    color: #6c757d;
-    font-weight: bold;
-}
-
-
-/* Define a specific width and height for images */
-.ingredients-list li img {
-    width: 50px;
-    /* Adjust the width to your desired size */
-    height: 50px;
-    /* Adjust the height to your desired size */
-}
-/* Hide ".jpg" links */
-.ingredients-list li a[href$=".jpg"] {
-    display: none;
+.search-results a {
+    text-decoration: none;
+    color: #000;
+    margin-bottom: 5px;
 }
 
 .cocktail-container {
@@ -39,23 +20,20 @@
     position: relative;
 }
 
-/* Update the .cocktail-list styling */
 .cocktail-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    margin-top: 75px;
 }
 
-/* Move the .cocktail-list-title styling to .cocktail-container */
 .cocktail-container .cocktail-list-title {
     font-weight: bold;
     font-size: 2rem;
     color: rgba(75, 0, 130, 0.8);
     padding: 10px;
     position: absolute;
-    top: 0;
+    top: -70px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -76,7 +54,7 @@
 .cocktail-image {
     width: 100%;
     height: 75%;
-    object-fit:contain;
+    object-fit: contain;
     border-radius: 10px 10px 0 0;
 }
 
@@ -145,29 +123,33 @@ h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 700px;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    margin-bottom: 16px;
 }
-
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    /* Align items to the start of the flex container (left side) */
     align-items: center;
     width: 100%;
+    height: 75px;
 }
 
 .header-right {
-    display: flex;
-    align-items: center;
+    margin-left: auto;
+    /* Push the header-right to the right */
 }
+
 .header-title {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 50px;
     background-color: #f8f9fa;
+    margin-bottom: 16px;
 }
 
 .header-title h1 {

@@ -21,7 +21,7 @@ const CombinedComponent = () => {
       setCocktails(selectedCocktails);
 
       const popularResponse = await axios.get('https://www.thecocktaildb.com/api/json/v2/9973533/popular.php');
-      setPopularCocktails(popularResponse.data.drinks.slice(0, 6));
+      setPopularCocktails(popularResponse.data.drinks.slice(0, 5));
     }
     fetchData();
   }, []);
