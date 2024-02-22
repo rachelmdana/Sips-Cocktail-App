@@ -1,0 +1,31 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Adjust the minimum column width as needed */
+    gap: 10px;
+    font-size: 1.5vw;
+    /* You can keep the font-size as it is for responsiveness */
+    padding: 0 10px;
+    /* Add padding to the container to ensure content doesn't touch the edges */
+}
+
+@media (max-width: 480px) {
+    .container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        /* Adjust the minimum column width for smaller screens */
+        font-size: 1.2vw;
+        /* Decrease font size for smaller screens */
+    }
+}
+
+@media (min-width: 769px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
