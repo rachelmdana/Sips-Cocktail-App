@@ -46,9 +46,9 @@ const handleSearch = async () => {
   return (
     <div className="header">
       <div className="header-right">
-        <h2>Search Cocktails</h2>
-        <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search cocktails" />
-        <button onClick={() => handleSearch(searchType)}>Search</button>
+        {/* <h2 className='search-title'>Search Cocktails</h2> */}
+        <input type="text" className='input-search' value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} placeholder='Cocktails' />
+        <button className='btn-search' onClick={() => handleSearch(searchType)}>Search</button>
         <div className="search-results">
           {searchResults.map((cocktail, index) => (
             <div key={index}>

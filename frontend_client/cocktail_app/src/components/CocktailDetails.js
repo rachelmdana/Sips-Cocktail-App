@@ -32,31 +32,34 @@ function CocktailDetails() {
 
   return (
     <div className='link'>
-      <button onClick={() => navigate('/')}>Home</button>
+      <button className='btn-home' onClick={() => navigate('/')}>Home</button>
       <h2>{drink.strDrink}</h2>
-      <img src={drink.strDrinkThumb} alt={drink.strDrink} />
-      <h3>Instructions:</h3>
-      <table>
-        <tbody>
-          {instructionSteps.map((step, index) => (
-            <tr key={index}>
-              <td>{index + 1}. {step}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <h3>Ingredients:</h3>
-      <table>
-        <tbody>
-          {cleanedIngredients.map((ingredient, index) => (
-            <tr key={index}>
-              <td>{index + 1}. {ingredient}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="details-container">
+        <div className="drink-image">
+          <img src={drink.strDrinkThumb} alt={drink.strDrink} />
+        </div>
+        <div className="details">
+          <div className="instructions">
+            <h3>Instructions:</h3>
+            <ul>
+              {instructionSteps.map((step, index) => (
+                <li key={index}>{index + 1}. {step}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="ingredients">
+            <h3>Ingredients:</h3>
+            <ul>
+              {cleanedIngredients.map((ingredient, index) => (
+                <li key={index}>{index + 1}. {ingredient}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
+
 
 export default CocktailDetails;
